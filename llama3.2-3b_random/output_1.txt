@@ -1,0 +1,75 @@
+PDDL (Planning Domain Definition Language) is a formal language used to describe planning domains, which are the environments in which plans need to be generated. It's a widely-used standard for representing planning problems and defining the constraints of a domain.
+
+In essence, PDDL allows you to define the structure of a problem by specifying:
+
+1. **Actions**: What actions can be performed on objects in the environment.
+2. **States**: The possible states of the environment.
+3. **Initial state**: The initial state of the environment.
+4. **Goal**: The desired final state of the environment.
+
+PDDL provides a set of predicates, functions, and operators that can be used to define these elements. Predicates are used to describe properties of objects (e.g., "is_red"), while functions represent relationships between objects (e.g., "color"). Operators specify how actions affect the world (e.g., "pick_up").
+
+PDDL domains typically consist of:
+
+* **Domain definition**: A set of predicates, functions, and operators that define the domain.
+* **Problem instance**: An instance of a planning problem, which includes:
+	+ Initial state
+	+ Goal state
+	+ A list of actions that can be taken
+
+Example of a PDDL domain:
+
+```
+(define (block-world)
+  (domain block-world)
+
+  (:requirements :strips :typing)
+
+  (:types 
+    object 
+    room 
+    )
+
+  (:predicates
+    is-object-object (x object) (y object)
+    on-room (x room) (y room)
+    has-obj (x object) (y object)
+    has-obj-on (x object) (y room)
+
+    is-picked-up (x object) 
+    )
+
+  (:functions
+    pick-up 
+    put-down
+
+    )
+)
+
+(define (moving-blocks)
+  (domain moving-blocks)
+
+  (:requirements :strips :typing)
+
+  (:types 
+    block 
+    person 
+    )
+
+  (:predicates
+    is-block-block (x block) 
+    on-person (x person) (y block)
+
+    )
+
+  (:functions
+    move-to-left 
+    move-to-right 
+
+    )
+)
+```
+
+In this example, the `block-world` domain defines two types: `object` and `room`. The `moving-blocks` domain defines two types: `block` and `person`.
+
+PDDL is widely used in planning and artificial intelligence research, as well as in real-world applications such as robotics, healthcare, and logistics.
