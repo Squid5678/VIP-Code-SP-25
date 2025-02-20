@@ -1,0 +1,32 @@
+PDDL (Planning Domain Definition Language) is a standard language used to define planning problems in artificial intelligence and computer science. It is widely used in the field of robotics, autonomous systems, and other areas where planning is crucial.
+
+PDDL defines a set of rules and objects that can be used to describe a planning problem. The goal of PDDL is to provide a common framework for representing planning problems in a way that can be easily understood by planners and solvers.
+
+A typical PDDL problem consists of the following elements:
+
+1. **Domain**: A description of the world, including the objects, actions, and their relationships.
+2. **Problem**: A specific instance of the domain, with initial and goal states.
+3. **Actions**: A set of actions that can be performed on the objects in the domain.
+
+PDDL provides a formal way to define these elements, allowing planners and solvers to reason about the planning problem in a structured and efficient manner.
+
+Some key features of PDDL include:
+
+* **Predicate logic**: PDDL uses predicate logic to describe the relationships between objects and actions.
+* **Actions with effects**: Each action has an effect on the state of the world.
+* **Initiation and termination conditions**: The initial and goal states are specified using initiation and termination conditions.
+* **Successors**: The possible next states that can be reached by applying an action.
+
+PDDL is widely used in planning communities, including:
+
+1. **Planning competitions**: PDDL is often used to define problems for competitions, such as the International Planning Competition (IPC).
+2. **Robotics**: PDDL is used to plan tasks and movements for robots.
+3. **Autonomous systems**: PDDL is used to plan navigation and control of autonomous vehicles.
+
+Some popular planners that support PDDL include:
+
+1. **Shop**: A planning system developed at Stanford University.
+2. **Optimism**: A planner developed by the AI Lab at Carnegie Mellon University.
+3. **PlanSpace**: A planning system developed at the University of Pennsylvania.
+
+Overall, PDDL provides a standard way to represent and reason about planning problems in a structured and efficient manner, allowing planners and solvers to focus on solving complex planning problems.

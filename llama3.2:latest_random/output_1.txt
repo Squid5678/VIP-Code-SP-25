@@ -1,0 +1,29 @@
+PDDL (Planning Domain Definition Language) is a standard for representing planning problems in a formal and machine-readable format. It was developed by the International Joint Conference on Artificial Intelligence (IJCAI) and has since become widely used in the field of artificial intelligence, particularly in the area of planning.
+
+A PDDL problem consists of three main components:
+
+1. **Domain**: This is a description of the world, including the objects, actions, and relationships between them.
+2. **Problem**: This specifies the initial state of the world and the desired final state, as well as any constraints that must be satisfied during planning.
+3. **Actions**: These represent possible actions that can be taken in the world, along with their effects on the state.
+
+PDDL problems are often used to test and evaluate planners, which are algorithms that use reasoning and search techniques to find a solution to a planning problem. PDDL provides a standardized way of expressing planning problems, making it easier for researchers and practitioners to compare results and develop new planners.
+
+Some common features of Pddl domains include:
+
+* **Objects**: Represented as constants or variables in the domain.
+* **Actions**: Represented as predicates with inputs and outputs (i.e., effects).
+* **Effects**: The changes that an action causes to the state.
+* **Preconditions**: Conditions that must be met before an action can be executed.
+
+PDDL has several advantages, including:
+
+* **Universality**: PDDL problems can be solved by planners implemented in any language.
+* **Portability**: Planners written for one domain can often be adapted for use with other domains.
+* **Expressiveness**: Pddl provides a formal and concise way to express planning problems.
+
+However, PDDL also has some limitations, such as:
+
+* **Complexity**: Large-scale PDDL problems can be difficult to solve due to the size of the search space.
+* **Flexibility**: PDDL is not designed for dynamic or uncertain environments, where adaptability and flexibility are essential.
+
+Despite these limitations, PDDL remains a widely used and well-established standard in the field of planning.

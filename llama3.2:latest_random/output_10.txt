@@ -1,0 +1,34 @@
+PDDL (Planning Domain Definition Language) is a formal language used to define planning domains, problems, and solutions in artificial intelligence. It is widely used in the field of planning as a standard for representing planning problems.
+
+PDDL was first introduced in 1992 by Russell and Norvig in their book "Artificial Intelligence: A Modern Approach". The language provides a way to formally define a planning domain, which includes:
+
+1. **Domain**: The rules that govern the world, including the objects, actions, and relationships between them.
+2. **Problem**: A specific instance of a problem that is solvable by finding a plan.
+
+A PDDL domain typically consists of several components:
+
+1. **Predicates**: Logical statements that describe the state of the world, such as "object A is in room B".
+2. **Actions**: Rules that define what actions can be taken to change the state of the world.
+3. **Init**: The initial state of the world.
+
+A PDDL problem typically consists of:
+
+1. **Goal**: A specific goal that needs to be achieved, such as "move object A to room C".
+2. **Inhibition**: Rules that restrict or prevent certain actions from being taken.
+3. **Preconditions**: Conditions that must be met before an action can be taken.
+
+PDDL provides a standardized way of representing planning problems and solutions, making it easier to compare and evaluate different planning algorithms and systems. It is widely used in the field of artificial intelligence, robotics, and computer science.
+
+Some common applications of PDDL include:
+
+* **Robotics**: Planning tasks for robots, such as navigation, assembly, or maintenance.
+* **Supply Chain Management**: Optimizing logistics and distribution networks.
+* **Manufacturing**: Planning production schedules and workflows.
+* **Healthcare**: Scheduling medical procedures and managing patient care.
+
+There are several variants of PDDL, including:
+
+* **PDDL3**: A new version of the language that provides improved support for planning domains with uncertainty and partial observability.
+* **PDDL4**: A variant of PDDL that includes a formal definition of planning problems as graphs.
+
+Overall, PDDL is an important standard in the field of artificial intelligence, providing a common framework for representing planning problems and solutions.

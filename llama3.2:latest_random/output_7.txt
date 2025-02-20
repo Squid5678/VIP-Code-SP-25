@@ -1,0 +1,45 @@
+PDDL (Planning Domain Definition Language) is a formal language used to define planning domains and problems. It is a widely-used standard for expressing domain knowledge in the context of planning, which involves finding a sequence of actions that transforms an initial state into a target state.
+
+PDDL was developed by the International Joint Conference on Artificial Intelligence (IJCAI) as a standard for representing planning domains and problems. The language is designed to be flexible, extensible, and human-readable, making it suitable for use in various planning applications, including expert systems, robotics, and artificial intelligence research.
+
+A PDDL domain definition consists of three main components:
+
+1. **Domain**: Describes the structure and semantics of the planning problem. It includes information about the types of objects, actions, and predicates that are relevant to the problem.
+2. **Problem**: Defines a specific instance of the planning problem, specifying the initial and target states, as well as any additional constraints or objectives.
+3. **Actions**: Specifies the possible actions that can be taken in the domain, including their preconditions (necessary conditions), effects (consequences), and costs.
+
+PDDL domains and problems are typically expressed using a syntax that involves:
+
+* Predicates: Binary predicates that relate objects to each other (e.g., "X is A").
+* Actions: Actions that transform states from one to another.
+* Planning objectives: Goals that the planner strives to achieve.
+* Constraint networks: Networks of constraints that define the relationships between objects.
+
+PDDL provides a rich set of operators and built-in predicates for expressing domain knowledge, including:
+
+* Equality tests
+* Inequality tests
+* Comparison operators (e.g., "X > Y")
+* Membership predicates (e.g., "X is A")
+* Action modifiers (e.g., "if" and "unless")
+
+The use of PDDL enables planning systems to reason about the planning problem in a systematic and efficient manner, making it an essential tool for many applications in artificial intelligence, robotics, and beyond.
+
+Here's an example of a simple PDDL domain definition:
+```pddl
+(define (domain car-park)
+  (:requirements :strips :typing)
+  (:types car person)
+  (:predicates
+    (is-car ?x ?y)
+    (is-person ?x ?y)
+    (parked-in-car ?x ?y)
+  )
+  (:action park
+    :parameters (?car ?person)
+    :preconditions (and (is-car ?car ?person) (not (parked-in-car ?car ?person)))
+    :effects (and (parked-in-car ?car ?person) (not (parked-in-car ?car ?person))))
+  )
+)
+```
+This example defines a simple domain for a car park, with predicates and actions that define the relationships between cars and people.

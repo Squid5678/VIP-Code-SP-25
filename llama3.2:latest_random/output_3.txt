@@ -1,0 +1,29 @@
+PDDL (Planning Domain Definition Language) is a language used to define planning domains and problems in artificial intelligence. It provides a standardized way to represent the structure of a problem, including the goals, actions, and their preconditions.
+
+In PDDL, a planning domain is defined using a set of axioms that describe the relationships between objects, actions, and their effects. The domain definition includes:
+
+1. **Objects**: Represented as constants or variables.
+2. **Actions**: Represented as predicate symbols, which are functions that take an object as input and produce an output.
+3. **Preconditions**: Described using logical formulas, specifying the conditions under which an action can be executed.
+4. **Effects**: Described using logical formulas, specifying the changes to objects caused by an action's execution.
+
+PDDL domains are commonly used in planning and scheduling applications, such as robotics, supply chain management, and manufacturing systems. The language provides a standard way to define problems, making it easier for researchers and practitioners to develop and compare planning algorithms.
+
+Here is an example of a simple PDDL domain:
+```
+(define (block-stacking problem)
+  (domain block-stacking
+    (typedef :action (stick -top) :result (on top))
+    (precondition top empty)
+    (effect (+top .next)))
+)
+```
+This defines a planning domain called "block-stacking" with an action "stick" that takes one block as input and results in another block on top of the first. The precondition is that the top block should be empty, and the effect is to add a new block on top.
+
+PDDL also provides a number of other features, including:
+
+* **Planning problems**: Represented using a specific format for defining goals, actions, and constraints.
+* **Heuristics**: Used to guide the planning process, such as admissible heuristics or utility functions.
+* **Search algorithms**: Implemented in various ways, such as forward search, backward search, or iterative deepening.
+
+Overall, PDDL is an important language for planning and reasoning, providing a standardized way to define problems and solve them using a variety of techniques.
