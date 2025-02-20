@@ -115,7 +115,7 @@ class OllamaUI(QWidget):
         }
 
         for i in range(runCount):
-            self.logBox.appendPlainText(f"\n--- Request #{i+1} ---")
+            self.logBox.appendPlainText(f"\n--- PROMPT TEST #{i+1} ---")
             startTime = time.time()
             try:
                 response = requests.post(api_url, headers=headers, data=json.dumps(base_data))
@@ -141,10 +141,10 @@ class OllamaUI(QWidget):
                         outF.write(text_response)
 
                     # Log success
-                    self.logBox.appendPlainText(f"Success! Output saved to {outputFile}")
+                    self.logBox.appendPlainText(f"Success. Output saved to {outputFile}")
                 else:
                     # Error in status code
-                    self.logBox.appendPlainText(f"Error: Status code {response.status_code}")
+                    self.logBox.appendPlainText(f"Error!!! Status code {response.status_code}")
                     self.logBox.appendPlainText(f"Details: {response.text}")
             except requests.exceptions.RequestException as e:
                 self.logBox.appendPlainText(f"Exception in request: {str(e)}")
