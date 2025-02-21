@@ -7,7 +7,7 @@ from geometry_msgs.msg import Twist
 class MoveRobot:
     def __init__(self):
         # Initialize the ROS node
-        rospy.init_node('move_robot_node', anonymous=True)
+        rospy.init_node('/mobile_base/commands/velocity', anonymous=True)
 
         # Publisher to send velocity commands to the TurtleBot
         self.cmd_pub = rospy.Publisher('/cmd_vel', Twist, queue_size=10)
