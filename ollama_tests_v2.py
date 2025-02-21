@@ -10,8 +10,8 @@ from PyQt5.QtWidgets import (
 import ollama
 import re
 
-def sanitize_filename(name):
-        """Replaces invalid filename characters with '-'"""
+def simplifyModelName(name):
+        """Replaces invalid filename characters with '-' for directory creation"""
         return re.sub(r'[<>:"/\\|?*]', '-', name)  # Replace invalid characters with '-'
 
 class OllamaUI(QWidget):
@@ -96,7 +96,7 @@ class OllamaUI(QWidget):
             return
 
         # Create new folder (model + prompt name)   
-        safe_model_name = sanitize_filename(selectedModel)   #new line to clean up folder name
+        safe_model_name = simplifyModelName(selectedModel)   #new line to clean up folder name
         promptName = os.path.splitext(os.path.basename(self.promptFilePath))[0]
         folderName = f"{safe_model_name}_{promptName}"  #changed the variable name to safe_model_name
         if not os.path.exists(folderName):
