@@ -17,12 +17,15 @@ Since both PDDL and planning are highly specialized tasks, I think the benchmark
 
    For comprehensive validation, including syntax, logic consistency, and plan success checks, the VAL tool seems to be a common option. It runs on Linux and requires downloading and compiling from GitHub:  
     [https://github.com/KCL-Planning/VAL](https://github.com/KCL-Planning/VAL)  
+   
    For now, I set up an Ubuntu WSL environment on my Windows machine and successfully tested a simple block-placing task (see the files in the following folder with link) for plan validity via the command line. However, I haven’t yet tested the Python validation script, as it requires setting up an environment in Ubuntu. (I plan to do this in about 3 weeks once I get my other laptop back from repair.)  
+   
    The validation scripts using the VAL tool and the sample files are stored in the github repo:  📂 ...VIP-Code-SP-25/planning\_validation  
+   
    There are additional available planning tools that are similar to the VAL tool, all run on Ubuntu. I can also look into those as well in the future.
 
 3. #### **Additional Tool – Online Planner**
 
    To generate simple plans, I also experimented with this online tool: [https://editor.planning.domains/\#](https://editor.planning.domains/#)
 
-However, only some of the available planning tools function correctly on the website.
+   However, only some of the available planning tools function correctly on the website.
