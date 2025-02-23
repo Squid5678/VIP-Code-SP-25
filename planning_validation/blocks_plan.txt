@@ -1,0 +1,3 @@
+0: (pick-up A)
+1: (place-on A B) 
+
