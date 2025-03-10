@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
-import openai
+from openai import OpenAI
+
+client = OpenAI(api_key="sk-REPLACE_ME")
 import rospy
 from std_msgs.msg import String
 from geometry_msgs.msg import Twist
@@ -8,10 +10,9 @@ from geometry_msgs.msg import Twist
 class MoveRobotWithOpenAI:
     def __init__(self):
         rospy.init_node('move_robot_openai', anonymous=True)
-        self.cmd_pub = rospy.Publisher('/cmd_vel', Twist, queue_size=10)
+        self.cmd_pub = rospy.Publisher('/mobile_base/commands/velocity', Twist, queue_size=10)
 
         # OPENAI KEY (note: leaving blank purposefully on this repo)
-        openai.api_key = "sk-REPLACE_ME"
         file_name = "command.txt"
 
         prompt_text = self.read_prompt_file(file_name)
@@ -43,15 +44,13 @@ class MoveRobotWithOpenAI:
         user_message = f"User's command: {prompt_text}\n\n"
 
         try:
-            response = openai.ChatCompletion.create(
-                model="gpt-4o-mini",
-                messages=[
-                    {"role": "system", "content": system_message},
-                    {"role": "user", "content": user_message}
-                ],
-                temperature=0.0  # NOTE: temperature changes determinism level of output
-            )
-            content = response["choices"][0]["message"]["content"].strip()
+            response = client.chat.completions.create(model="gpt-4o-mini",
+            messages=[
+                {"role": "system", "content": system_message},
+                {"role": "user", "content": user_message}
+            ],
+            temperature=0.0)  # NOTE: temperature changes determinism level of output)
+            content = response.choices[0].message.content.strip()
             rospy.loginfo("OpenAI raw response: %s", content)
 
             parts = content.split()
