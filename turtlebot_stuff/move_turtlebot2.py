@@ -5,6 +5,7 @@ from std_msgs.msg import String
 from geometry_msgs.msg import Twist
 from nav_msgs.msg import Odometry
 import math
+import time
 
 class MoveRobot:
     def __init__(self):
@@ -52,23 +53,34 @@ class MoveRobot:
 
         rospy.loginfo("Received command: distance = %s meters, direction = %s", distance, direction)
 
+        if direction != 0 and direction != 1 and direction != 2 and direction != 3: 
+            rospy.logerr("Invalid direction. Please use 0 (forward), 1 (backward), 2 (left), or 3 (right).")
+            return
+
         # Create a Twist message
         twist = Twist()
 
         # Define movements based on direction:
         # 0 = forward, 1 = backward, 2 = left turn, 3 = right turn
-        if direction == 0:
-            twist.linear.x = 1.0   # Move forward
-        elif direction == 1:
-            twist.linear.x = -1.0  # Move backward
-        elif direction == 2:
-            twist.angular.z = 0.5  # Turn left
+        if direction == 2:
+            twist.angular.z = 1.57  # Turn left
         elif direction == 3:
-            twist.angular.z = -0.5 # Turn right
-        else:
-            rospy.logerr("Invalid direction. Please use 0 (forward), 1 (backward), 2 (left), or 3 (right).")
-            return
+            twist.angular.z = -1.57 # Turn right
 
+        # rotate the robot to either left or right
+        if direction == 2 or direction == 3: 
+            for i in range(4):
+                # have the robot rotate
+                self.cmd_pub.publish(twist) 
+                time.sleep(0.25)
+            
+
+        twist.angular.z = 0.0
+        twist.linear.x = 1.0 # for moving forward
+        if direction == 1:
+            twist.linear.x = -1.0  # Move backward
+        
+        
         self.initial_position = self.current_position 
         distance_travelled = 0
 
@@ -79,7 +91,6 @@ class MoveRobot:
             dy = self.current_position.y - self.initial_position.y
             distance_travelled = math.sqrt(dx**2 + dy**2)
 
-            
 
         # Stop the robot after moving
         stop_twist = Twist()
