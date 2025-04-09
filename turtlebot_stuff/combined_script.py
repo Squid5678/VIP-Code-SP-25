@@ -7,23 +7,18 @@ import math
 import time
 from openai import OpenAI
 
-# Set your OpenAI API key here (replace "sk-REPLACE_ME" with your key)
 client = OpenAI(api_key="sk-REPLACE_ME")
 
 class MoveRobotCombined:
     def __init__(self):
-        # Initialize the ROS node
         rospy.init_node('move_robot_combined', anonymous=True)
 
-        # Publisher to send velocity commands to the robot
         self.cmd_pub = rospy.Publisher('/mobile_base/commands/velocity', Twist, queue_size=10)
 
-        # Subscribe to Odometry topic to get real-time position feedback
         rospy.Subscriber('/odom', Odometry, self.odom_callback)
         self.current_position = None
         self.initial_position = None
 
-        # Read the command from file and get movement parameters using OpenAI
         prompt_text = self.read_prompt_file("command.txt")
         distance, direction = self.get_move_parameters_from_openai(prompt_text)
         if distance is not None and direction is not None:
@@ -33,10 +28,6 @@ class MoveRobotCombined:
             rospy.logerr("Failed to get valid movement parameters from OpenAI.")
 
     def odom_callback(self, data):
-        """
-        Callback to update the current position of the robot using odometry data.
-        When the first message arrives, it initializes both current and initial positions.
-        """
         if self.current_position is None:
             self.current_position = data.pose.pose.position
             self.initial_position = self.current_position
@@ -44,9 +35,6 @@ class MoveRobotCombined:
             self.current_position = data.pose.pose.position
 
     def read_prompt_file(self, filename):
-        """
-        Read the movement command from a file.
-        """
         try:
             with open(filename, 'r') as f:
                 content = f.read()
@@ -57,12 +45,6 @@ class MoveRobotCombined:
             return ""
 
     def get_move_parameters_from_openai(self, prompt_text):
-        """
-        Use the OpenAI API to extract movement parameters from a prompt.
-        The command should be returned in the format: "<value> <direction>"
-        - For forward/backward (directions 0 and 1) the <value> is the distance in meters.
-        - For left/right (directions 2 and 3) the <value> is the rotation angle in radians.
-        """
         system_message = (
             "You are the brain of a turtlebot. You are provided with a prompt "
             "that contains a distance (in meters for linear movement or as an angle for rotation) "
@@ -95,13 +77,6 @@ class MoveRobotCombined:
             return None, None
 
     def move_robot(self, value, direction):
-        """
-        Moves the robot based on the provided command:
-        - For directions 0 (forward) and 1 (backward): uses odometry feedback
-          to travel a specific linear distance (in meters).
-        - For directions 2 (left) and 3 (right): rotates the robot.
-          Here, 'value' is treated as the desired rotation angle in radians.
-        """
         # For linear movement (forward or backward)
         if direction == 0 or direction == 1:
             # Wait until an odom update is received before starting
@@ -110,7 +85,6 @@ class MoveRobotCombined:
             self.initial_position = self.current_position
 
             twist = Twist()
-            # Set linear speed (adjust as needed)
             twist.linear.x = 0.2 if direction == 0 else -0.2
 
             distance_travelled = 0.0
@@ -137,8 +111,6 @@ class MoveRobotCombined:
             else:
                 twist.angular.z = -1.57  # turning right
 
-            # Compute the duration needed to reach the desired rotation angle.
-            # Duration (in seconds) = desired_angle / angular_speed (using absolute values)
             time_needed = abs(value) / abs(twist.angular.z)
             rospy.loginfo("Rotating for %.2f seconds to achieve an angle of %.2f radians", time_needed, value)
             end_time = rospy.Time.now() + rospy.Duration(time_needed)
